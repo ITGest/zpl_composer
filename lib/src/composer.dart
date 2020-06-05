@@ -1,4 +1,3 @@
-library zpl_composer;
 
 abstract class ZplComposer {
   /// Builds this ZPL composer instance
