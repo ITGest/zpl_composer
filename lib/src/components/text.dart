@@ -1,36 +1,39 @@
-import 'package:flutter/cupertino.dart';
 import 'package:zpl_composer/src/composer.dart';
 
 class Text implements ZplComposer {
   String text;
-  double y;
-  double x;
-  double fontSize;
-  bool bold;
+  int fontSize;
+  bool isBold;
 
-  String _zplString;
+  int y;
+  int x;
 
-  Text(this.text,{@required this.x,@required this.y, this.fontSize=23,this.bold});
-  
+  String _zplString = '';
+
+  Text(
+    this.text, {
+    this.fontSize = 23,
+    this.isBold = false,
+  });
+
   @override
   ZplComposer build() {
+    final bold = isBold ? 'A' : '0';
 
-    final  boldValue = bold?'0':'A';
+    _zplString = '^CF$bold,$fontSize^FO$x,$y^FD$text^FS';
 
-    _zplString = """
-     ^CF$boldValue,$fontSize
-     ^FO$x,$y^FD$text^FS
-     """;
     return this;
   }
 
   @override
   ZplComposer fromString(String zplString) {
-   return this;
+    return this;
   }
 
   @override
   String toString() {
-   return  _zplString;
+    build();
+
+    return _zplString;
   }
 }
