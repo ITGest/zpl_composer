@@ -1,10 +1,15 @@
 abstract class ZplComposer {
   /// Builds this ZPL composer instance
-  ZplComposer build();
+  /// [ZplComposer parent] represents the parent
+  /// component that requested this instance to build
+  ZplComposer build(ZplComposer parent);
 
-  /// Builds this ZPL from a string
+  /// Makes a new instance based on [zplString]
+  ///
+  /// [zplString] the String that will be used
+  /// to build this instance
   ZplComposer fromString(String zplString);
 
-  /// Convert this ZPL instance to a string
+  /// Gets the ZPL code as String
   String toString();
 }

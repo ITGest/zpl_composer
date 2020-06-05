@@ -16,8 +16,11 @@ class Text implements ZplComposer {
     this.isBold = false,
   });
 
+  /// Builds this ZPL composer instance
+  /// [ZplComposer parent] represents the parent
+  /// component that requested this instance to build
   @override
-  ZplComposer build() {
+  ZplComposer build([ZplComposer parent]) {
     final bold = isBold ? 'A' : '0';
 
     _zplString = '^CF$bold,$fontSize^FO$x,$y^FD$text^FS';
@@ -25,11 +28,16 @@ class Text implements ZplComposer {
     return this;
   }
 
+  /// Makes a new instance based on [zplString]
+  ///
+  /// [zplString] the String that will be used
+  /// to build this instance
   @override
   ZplComposer fromString(String zplString) {
     return this;
   }
 
+  /// Gets the ZPL code as String
   @override
   String toString() {
     build();
