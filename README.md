@@ -1,14 +1,55 @@
-# zpl_composer
+# ZPL Composer
 
-A new Flutter package project.
+A ZPL composer package
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+This package aims to facilitate the life developers who want to dynamically builds ZPL templates
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+This package can help you building ZPL templates in a very Flutter friendly way
+
+## Installation
+
+```yml
+dependencies:
+  flutter:
+    sdk: flutter
+  zpl_composer: ^0.0.1
+```
+
+```dart
+import 'package:zpl_composer/zpl_composer';
+```
+
+## Example
+
+```dart
+import 'package:zpl_composer/zpl_composer';
+
+final _page = Page(
+  child: Column(
+    children: [
+      Text(
+          'Title',
+          isBold: true,
+          fontSize: 25,
+        ),
+      ),
+      for (Product product in _products)
+      	Row(
+          children: [
+            Flex(
+              child: Text('Nome'),
+            ),
+            Flex(
+              align: FlexAlign.right,
+              child: Text(_product.name),
+            ),
+          ],
+        ),
+    ],
+  ),
+),
+
+_page.toString(); // ^XA^CFA,1^FO0,0,^FDTitle^FS^XZ
+```
