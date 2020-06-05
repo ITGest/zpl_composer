@@ -1,3 +1,5 @@
+library zpl_composer;
+
 import 'package:zpl_composer/src/composer.dart';
 
 class Text implements ZplComposer {
