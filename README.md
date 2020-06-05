@@ -47,5 +47,5 @@ final _page = Page(
   ),
 ),
 
-_page.toString(); // ^XA^CFA,1^FO0,0,^FDTitle^FS^XZ
+_page.getString(); // ^XA^CFA,1^FO0,0,^FDTitle^FS^XZ
 ```
