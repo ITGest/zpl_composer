@@ -1,5 +1,3 @@
-library zpl_composer;
-
 import 'package:zpl_composer/src/composer.dart';
 
 class Text implements ZplComposer {
@@ -41,7 +39,7 @@ class Text implements ZplComposer {
 
   /// Gets the ZPL code as String
   @override
-  String toString() {
+  String getString() {
     build();
 
     return _zplString;

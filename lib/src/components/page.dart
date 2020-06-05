@@ -11,7 +11,7 @@ class Page implements ZplComposer {
 
   @override
   ZplComposer build([ZplComposer parent]) {
-    final _childZplString = child.toString();
+    final _childZplString = child.getString();
 
     _zplString = '^XA$_childZplString^XZ';
 
@@ -24,7 +24,7 @@ class Page implements ZplComposer {
   }
 
   @override
-  String toString() {
+  String getString() {
     build();
 
     return _zplString;

@@ -47,12 +47,12 @@ void main() {
     expect(_text.build() is ZplComposer, true);
   });
 
-  test('Test if toString() returns the ZPL code', () {
+  test('Test if getString() returns the ZPL code', () {
     final _text = Text('Title');
 
-    expect(() => _text.toString(), returnsNormally);
+    expect(() => _text.getString(), returnsNormally);
 
-    final _textText = _text.toString();
+    final _textText = _text.getString();
 
     expect(_textText.isNotEmpty, true);
     expect(_textText.startsWith('^CF'), true);
@@ -61,7 +61,7 @@ void main() {
     expect(_textText.endsWith('^FS'), true);
   });
 
-  test('Test if toString() returns the ZPL code with the required parameters',
+  test('Test if getString() returns the ZPL code with the required parameters',
       () {
     final _text = Text(
       'Title',
@@ -72,8 +72,7 @@ void main() {
     _text.x = 10;
     _text.y = 20;
 
-    final _textText = _text.toString();
-    print(_textText);
+    final _textText = _text.getString();
 
     expect(_textText.contains('^CFA,25'), true);
     expect(_textText.contains('^FO10,20'), true);

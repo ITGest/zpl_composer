@@ -1,4 +1,3 @@
-
 abstract class ZplComposer {
   /// Builds this ZPL composer instance
   /// [ZplComposer parent] represents the parent
@@ -12,5 +11,5 @@ abstract class ZplComposer {
   ZplComposer fromString(String zplString);
 
   /// Gets the ZPL code as String
-  String toString();
+  String getString();
 }
