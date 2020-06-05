@@ -17,10 +17,6 @@ dependencies:
   zpl_composer: ^0.0.1
 ```
 
-```dart
-import 'package:zpl_composer/zpl_composer';
-```
-
 ## Example
 
 ```dart
