@@ -1,8 +1,8 @@
 name: zpl_composer
-description: A ZPL composer.
+description: A ZPL composer package
 version: 0.0.1-beta.1
 author: Alas de Laas
-homepage:
+homepage: https://github.com/CoderAware/zpl_composer
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
