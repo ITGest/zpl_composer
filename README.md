@@ -39,7 +39,7 @@ final _page = Page(
       	Row(
           children: [
             Flex(
-              child: Text('Nome'),
+              child: Text('Name'),
             ),
             Flex(
               align: FlexAlign.right,
