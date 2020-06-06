@@ -1,35 +1,29 @@
-import 'package:flutter/material.dart';
-import 'package:zpl_composer/src/components/alignment.dart';
+import 'package:zpl_composer/src/components/flex/align.dart';
 import 'package:zpl_composer/src/composer.dart';
 
-class Flex implements ZplComposer{
-  final HorizontalAlignment alignment;
+class Flex implements ZplComposer {
+  final FlexAlign align;
+
   int position;
 
-  Flex({@required this.alignment});
+  Flex({this.align});
+
   @override
   ZplComposer build([ZplComposer parent]) {
-    position = alignment ==HorizontalAlignment.left?50:260;
+    position = align == FlexAlign.left ? 50 : 260;
 
     return this;
-   
   }
 
   @override
   ZplComposer fromString(String zplString) {
-
     return this;
-    
   }
 
   @override
   String getString() {
-
     build();
 
-
     return position.toString();
-    
   }
-
 }

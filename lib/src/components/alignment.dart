@@ -1,5 +1,0 @@
-enum HorizontalAlignment{
-  righ,
-  left
-
-}
