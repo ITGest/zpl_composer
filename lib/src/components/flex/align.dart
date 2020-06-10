@@ -1,1 +1,1 @@
-enum FlexAlign { righ, left }
+enum FlexAlign { right, left }
