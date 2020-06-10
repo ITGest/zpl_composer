@@ -2,8 +2,6 @@ import 'package:zpl_composer/src/composer.dart';
 
 class Text implements ZplComposer {
   String text;
-  int fontSize;
-  bool isBold;
 
   int y;
   int x;
@@ -12,8 +10,8 @@ class Text implements ZplComposer {
 
   Text(
     this.text, {
-    this.fontSize = 23,
-    this.isBold = false,
+    this.x,
+    this.y,
   });
 
   /// Builds this ZPL composer instance
@@ -21,9 +19,7 @@ class Text implements ZplComposer {
   /// component that requested this instance to build
   @override
   ZplComposer build([ZplComposer parent]) {
-    final bold = isBold ? 'A' : '0';
-
-    _zplString = '^CF$bold,$fontSize^FO$x,$y^FD$text^FS';
+    _zplString = '^FO$x,$y^FD$text^FS';
 
     return this;
   }
