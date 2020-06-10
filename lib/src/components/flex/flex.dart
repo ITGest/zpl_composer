@@ -2,15 +2,23 @@ import 'package:zpl_composer/src/components/flex/align.dart';
 import 'package:zpl_composer/src/composer.dart';
 
 class Flex implements ZplComposer {
+  final int x;
+  final int y;
   final FlexAlign align;
+  final ZplComposer child;
 
   int position;
 
-  Flex({this.align});
+  Flex({
+    this.x,
+    this.y,
+    this.align,
+    this.child,
+  });
 
   @override
   ZplComposer build([ZplComposer parent]) {
-    position = align == FlexAlign.left ? 50 : 260;
+    position = align == FlexAlign.left ? x : 201 - 5;
 
     return this;
   }
