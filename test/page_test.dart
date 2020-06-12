@@ -24,23 +24,16 @@ void main() {
     expect(_page.child, _childMock);
   });
 
-  test('Tests if Page call getString() method of the child', () {
-    final _childMock = ZplComponentMock();
+  test('Tests if Page call to build method returns a ZplComposer', () {
+    final _mock = ZplComponentMock();
+
+    when(_mock.getString()).thenReturn('');
 
     final _page = Page(
-      child: _childMock,
+      child: _mock,
     );
 
     expect(() => _page.build(), returnsNormally);
-  });
-
-  test('Tests if Page call to build method returns a ZplComposer', () {
-    final _childMock = ZplComponentMock();
-
-    final _page = Page(
-      child: _childMock,
-    );
-
     expect(_page.build() is ZplComposer, true);
   });
 
@@ -62,6 +55,27 @@ void main() {
     expect(_zplString is String, true);
     expect(_zplString, contains('^XA'));
     expect(_zplString, contains('^XZ'));
-    expect(_zplString, contains('^XATitle^XZ'));
+    expect(_zplString, contains('^XA^CFA,23Title^XZ'));
   });
+
+  /* test('Tests if getString() returns normally', () async {
+    final _childMock = ZplComponentMock();
+
+    when(_childMock.getString()).thenReturn('Title');
+
+    final _page = Page(
+      child: _childMock,
+    );
+
+    _page.getString();
+
+    verify(_childMock.getString()).called(1);
+
+    final _zplString = _page.getString();
+
+    expect(_zplString is String, true);
+    expect(_zplString, contains('^XA'));
+    expect(_zplString, contains('^XZ'));
+    expect(_zplString, contains('^XATitle^XZ'));
+  }); */
 }

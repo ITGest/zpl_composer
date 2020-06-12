@@ -23,13 +23,12 @@ dependencies:
 import 'package:zpl_composer/zpl_composer';
 
 final _page = Page(
+  size: PageSize.small,
   child: Column(
     children: [
       Text(
-          'Title',
-          isBold: true,
-          fontSize: 25,
-        ),
+        'Title',
+        fontSize: 25,
       ),
       for (Product product in _products)
       	Row(
@@ -45,7 +44,7 @@ final _page = Page(
         ),
     ],
   ),
-),
+);
 
 _page.getString(); // ^XA^CFA,1^FO0,0,^FDTitle^FS^XZ
 ```

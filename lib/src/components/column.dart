@@ -1,13 +1,13 @@
 import 'package:zpl_composer/src/composer.dart';
 
-class Row implements ZplComposer {
+class Column implements ZplComposer {
   int x;
   int y;
   List<ZplComposer> children;
 
   String _zplString = '';
 
-  Row({
+  Column({
     this.x,
     this.y,
     this.children,

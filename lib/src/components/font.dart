@@ -1,14 +1,15 @@
-import 'package:zpl_composer/src/components/font.dart';
 import 'package:zpl_composer/src/composer.dart';
 
-class Page implements ZplComposer {
-  final int width;
-  final ZplComposer child;
+class Font implements ZplComposer {
+  int size;
+  String family;
+  ZplComposer child;
 
   String _zplString = '';
 
-  Page({
-    this.width,
+  Font({
+    this.size = 23,
+    this.family = 'A',
     this.child,
   });
 
@@ -16,20 +17,18 @@ class Page implements ZplComposer {
   ZplComposer build([ZplComposer parent]) {
     String _content = '';
 
-    if (!(child is Font)) {
-      _content = Font().getString();
+    if (child != null) {
+      _content = child.getString();
     }
 
-    _content += child.getString();
-
-    _zplString = '^XA$_content^XZ';
+    _zplString = '^CF$family,$size$_content';
 
     return this;
   }
 
   @override
   ZplComposer fromString(String zplString) {
-    return this;
+    throw UnimplementedError();
   }
 
   @override
