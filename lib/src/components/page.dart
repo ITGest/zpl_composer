@@ -20,7 +20,7 @@ class Page implements ZplComposer {
 
   @override
   ZplComposer fromString(String zplString) {
-    throw UnimplementedError();
+    return this;
   }
 
   @override
