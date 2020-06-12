@@ -3,46 +3,40 @@ import 'package:flutter/material.dart';
 import 'package:hex/hex.dart';
 import 'package:zpl_composer/src/composer.dart';
 
-class Image implements ZplComposer{
+class Image implements ZplComposer {
   final Uint8List imageBytes;
+
   int x;
   int y;
-  int width;
-  int height;
-  int total;
-  int widthBytes;
 
-  String _zplString='';
+  String _zplString = '';
 
-  Image(this.imageBytes,{this.x,this.y});
+  Image(
+    this.imageBytes, {
+    this.x,
+    this.y,
+  });
 
   @override
   ZplComposer build([ZplComposer parent]) {
+    decodeImageFromList(imageBytes).then((data) {
+      final _widthBytes = data.width ~/ 8;
 
-  ///[WE NEED THE INCOMING IMAGE PROPERTIES, SO  FIRST WE CAST THE INT BYTELIST TO IMAGE]
-  
-  decodeImageFromList(imageBytes).then((data) => {
-     width = data.width,
-     height = data.height,
-     widthBytes = width ~/ 8,
-     total = widthBytes * height
+      final _total = _widthBytes * data.height;
 
-  });
+      final _hexCode = HEX.encode(imageBytes);
 
-  ///[SECOND, CAST LIST BYTES TO HEX CODE TEXT]
-  
-    var hexCode = HEX.encode(imageBytes);
+      final _asciiCode = String.fromCharCodes(HEX.decode(_hexCode));
 
-  ///[THEN HEX CODE TEXT TO ASCII (Unicode) TEXT]
-  
-    var asciiCodeText = String.fromCharCodes(HEX.decode(hexCode));
-    _zplString="""^FO$x,$y^GFA,$total,$total,$widthBytes,$asciiCodeText^FS""";
+      _zplString = '^FO$x,$y^GFA,$_total,$_total,$_widthBytes,$_asciiCode^FS';
+    });
+
+    return this;
   }
 
   @override
   ZplComposer fromString(String zplString) {
     return this;
-   
   }
 
   @override
@@ -50,7 +44,5 @@ class Image implements ZplComposer{
     build();
 
     return _zplString;
-    
   }
-
 }
