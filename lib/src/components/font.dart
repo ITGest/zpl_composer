@@ -3,38 +3,33 @@ import 'package:zpl_composer/src/composer.dart';
 class Font implements ZplComposer {
   int size;
   String family;
+
   ZplComposer child;
 
-  String _zplString = '';
+  int x;
+  int y;
 
   Font({
     this.size = 23,
     this.family = 'A',
     this.child,
+    this.x,
+    this.y,
   });
 
   @override
-  ZplComposer build([ZplComposer parent]) {
+  Future<String> build([ZplComposer parent]) async {
     String _content = '';
 
     if (child != null) {
-      _content = child.getString();
+      _content += await child.build();
     }
 
-    _zplString = '^CF$family,$size$_content';
-
-    return this;
+    return '^CF$family,$size$_content';
   }
 
   @override
   ZplComposer fromString(String zplString) {
     throw UnimplementedError();
-  }
-
-  @override
-  String getString() {
-    build();
-
-    return _zplString;
   }
 }

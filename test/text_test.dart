@@ -20,19 +20,19 @@ void main() {
     expect(_text.text, 'Title');
   });
 
-  test('Test if can build', () {
+  test('Test if can build', () async {
     final _text = Text(null);
 
-    expect(() => _text.build(), returnsNormally);
-    expect(_text.build() is ZplComposer, true);
+    expect(() async => await _text.build(), returnsNormally);
+    expect(await _text.build() is String, true);
   });
 
-  test('Test if getString() returns the ZPL code', () {
+  test('Test if build() returns the ZPL code', () async {
     final _text = Text('Title');
 
-    expect(() => _text.getString(), returnsNormally);
+    expect(() async => await _text.build(), returnsNormally);
 
-    final _textText = _text.getString();
+    final _textText = await _text.build();
 
     expect(_textText.isNotEmpty, true);
     expect(_textText.contains('^FO'), true);
@@ -40,11 +40,10 @@ void main() {
     expect(_textText.endsWith('^FS'), true);
   });
 
-  test('Test if getString() returns the ZPL code with the required parameters',
-      () {
+  test('Test if build() returns the ZPL code with the required parameters', () async {
     final _text = Text('Title', x: 10, y: 20);
 
-    final _textText = _text.getString();
+    final _textText = await _text.build();
 
     expect(_textText.contains('^FO10,20'), true);
     expect(_textText.contains('^FDTitle'), true);

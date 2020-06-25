@@ -1,22 +1,25 @@
 import 'package:zpl_composer/src/composer.dart';
 
 class Margin implements ZplComposer {
-  final int top;
-  final int bottom;
+  int x;
+  int y;
+  int top;
+  int bottom;
 
-  Margin({this.bottom,this.top});
+  Margin({
+    this.bottom,
+    this.top,
+    this.x,
+    this.y,
+  });
+
   @override
-  ZplComposer build([ZplComposer parent]) {
-  
+  Future<String> build([ZplComposer parent]) {
+    return null;
   }
 
   @override
   ZplComposer fromString(String zplString) {
-   
-  }
-
-  @override
-  String getString() {
-  
+    return null;
   }
 }

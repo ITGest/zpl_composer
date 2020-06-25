@@ -5,37 +5,26 @@ class Page implements ZplComposer {
   final int width;
   final ZplComposer child;
 
-  String _zplString = '';
-
   Page({
     this.width,
     this.child,
   });
 
   @override
-  ZplComposer build([ZplComposer parent]) {
+  Future<String> build([ZplComposer parent]) async {
     String _content = '';
 
     if (!(child is Font)) {
-      _content = Font().getString();
+      _content += await Font().build();
     }
 
-    _content += child.getString();
+    _content += await child.build();
 
-    _zplString = '^XA$_content^XZ';
-
-    return this;
+    return '^XA$_content^XZ';
   }
 
   @override
   ZplComposer fromString(String zplString) {
     return this;
-  }
-
-  @override
-  String getString() {
-    build();
-
-    return _zplString;
   }
 }

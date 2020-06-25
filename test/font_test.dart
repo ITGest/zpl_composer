@@ -22,43 +22,43 @@ void main() {
     final _font = Font(
       size: 20,
       family: 'B',
+      child: ZplComposerMock(),
+      x: 1,
+      y: 2,
     );
 
     expect(_font.size, 20);
     expect(_font.family, 'B');
+    expect(_font.child is ZplComposer, isTrue);
+    expect(_font.x, 1);
+    expect(_font.y, 2);
   });
 
-  test('Test if build returns normally', () {
+  test('Test if build returns normally', () async {
     final _font = Font();
 
-    expect(() => _font.build(), returnsNormally);
-    expect(_font.build() is ZplComposer, isTrue);
+    expect(() async => await _font.build(), returnsNormally);
+    expect(await _font.build() is String, isTrue);
   });
 
-  test('Test if toString returns normally', () {
-    final _font = Font();
-
-    expect(() => _font.getString(), returnsNormally);
-  });
-
-  test('Test if getString() returns the right string when no child is given',
-      () {
+  test('Test if build() returns the right string when no child is given',
+      () async {
     final _font = Font(
       size: 25,
       family: 'B',
     );
 
-    final _zplString = _font.getString();
+    final _zplString = await _font.build();
 
     expect(_zplString, isNotEmpty);
     expect(_zplString, '^CFB,25');
   });
 
-  test('Test if getString() returns the right string when a child is given',
-      () {
+  test('Test if build() returns the right string when a child is given',
+      () async {
     final _mock = ZplComposerMock();
 
-    when(_mock.getString()).thenReturn('child_content');
+    when(_mock.build(null)).thenAnswer((_) async => 'child_content');
 
     final _font = Font(
       size: 25,
@@ -66,7 +66,7 @@ void main() {
       child: _mock,
     );
 
-    final _zplString = _font.getString();
+    final _zplString = await _font.build();
 
     expect(_zplString, isNotEmpty);
     expect(_zplString, equals('^CFB,25child_content'));

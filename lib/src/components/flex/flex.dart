@@ -17,21 +17,14 @@ class Flex implements ZplComposer {
   });
 
   @override
-  ZplComposer build([ZplComposer parent]) {
+  Future<String> build([ZplComposer parent]) {
     position = align == FlexAlign.left ? x : 201 - 5;
 
-    return this;
+    return child.build(this);
   }
 
   @override
   ZplComposer fromString(String zplString) {
     return this;
-  }
-
-  @override
-  String getString() {
-    build();
-
-    return position.toString();
   }
 }

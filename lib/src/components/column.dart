@@ -5,8 +5,6 @@ class Column implements ZplComposer {
   int y;
   List<ZplComposer> children;
 
-  String _zplString = '';
-
   Column({
     this.x,
     this.y,
@@ -14,19 +12,16 @@ class Column implements ZplComposer {
   });
 
   @override
-  ZplComposer build([ZplComposer parent]) {
-    _zplString += children.map((e) => e.getString()).toString();
+  Future<String> build([ZplComposer parent]) async {
+    final _futures = children.map((e) => e.build(this)).toList();
 
-    return this;
+    final _result = await Future.wait(_futures);
+
+    return _result.join();
   }
 
   @override
   ZplComposer fromString(String zplString) {
     throw UnimplementedError();
-  }
-
-  @override
-  String getString() {
-    return _zplString;
   }
 }

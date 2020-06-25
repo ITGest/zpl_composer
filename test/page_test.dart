@@ -24,33 +24,20 @@ void main() {
     expect(_page.child, _childMock);
   });
 
-  test('Tests if Page call to build method returns a ZplComposer', () {
-    final _mock = ZplComponentMock();
-
-    when(_mock.getString()).thenReturn('');
-
-    final _page = Page(
-      child: _mock,
-    );
-
-    expect(() => _page.build(), returnsNormally);
-    expect(_page.build() is ZplComposer, true);
-  });
-
-  test('Tests if getString() returns normally', () async {
+  test('Tests if build() returns normally', () async {
     final _childMock = ZplComponentMock();
 
-    when(_childMock.getString()).thenReturn('Title');
+    when(_childMock.build(null)).thenAnswer((_) => Future.value('Title'));
 
     final _page = Page(
       child: _childMock,
     );
 
-    _page.getString();
+    await _page.build();
 
-    verify(_childMock.getString()).called(1);
+    verify(_childMock.build(null)).called(1);
 
-    final _zplString = _page.getString();
+    final _zplString = await _page.build();
 
     expect(_zplString is String, true);
     expect(_zplString, contains('^XA'));
@@ -58,20 +45,33 @@ void main() {
     expect(_zplString, contains('^XA^CFA,23Title^XZ'));
   });
 
-  /* test('Tests if getString() returns normally', () async {
+  test('Tests if Page call to build method returns a String', () async {
+    final _mock = ZplComponentMock();
+
+    when(_mock.build(null)).thenAnswer((_) => Future.value(''));
+
+    final _page = Page(
+      child: _mock,
+    );
+
+    expect(() async => await _page.build(), returnsNormally);
+    expect(await _page.build() is String, true);
+  });
+
+  /* test('Tests if build() returns normally', () async {
     final _childMock = ZplComponentMock();
 
-    when(_childMock.getString()).thenReturn('Title');
+    when(_childMock.build()).thenReturn('Title');
 
     final _page = Page(
       child: _childMock,
     );
 
-    _page.getString();
+    _page.build();
 
-    verify(_childMock.getString()).called(1);
+    verify(_childMock.build()).called(1);
 
-    final _zplString = _page.getString();
+    final _zplString = _page.build();
 
     expect(_zplString is String, true);
     expect(_zplString, contains('^XA'));

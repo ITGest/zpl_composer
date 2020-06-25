@@ -8,7 +8,7 @@ import 'package:zpl_composer/src/components/row.dart';
 import 'package:zpl_composer/src/components/text.dart';
 
 void main() {
-  test('ZPL', () {
+  test('ZPL', () async {
     final _page = Page(
       width: 201,
       child: Font(
@@ -34,6 +34,6 @@ void main() {
       ),
     );
 
-    print(_page.getString());
+    print(await _page.build());
   });
 }

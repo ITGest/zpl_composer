@@ -9,8 +9,6 @@ class Image implements ZplComposer {
   int x;
   int y;
 
-  String _zplString = '';
-
   Image(
     this.imageBytes, {
     this.x,
@@ -18,31 +16,22 @@ class Image implements ZplComposer {
   });
 
   @override
-  ZplComposer build([ZplComposer parent]) {
-    decodeImageFromList(imageBytes).then((data) {
-      final _widthBytes = data.width ~/ 8;
+  Future<String> build([ZplComposer parent]) async {
+    final _data = await decodeImageFromList(imageBytes);
 
-      final _total = _widthBytes * data.height;
+    final _widthBytes = _data.width ~/ 8;
 
-      final _hexCode = HEX.encode(imageBytes);
+    final _total = _widthBytes * _data.height;
 
-      final _asciiCode = String.fromCharCodes(HEX.decode(_hexCode));
+    final _hexCode = HEX.encode(imageBytes);
 
-      _zplString = '^FO$x,$y^GFA,$_total,$_total,$_widthBytes,$_asciiCode^FS';
-    });
+    final _asciiCode = String.fromCharCodes(HEX.decode(_hexCode));
 
-    return this;
+    return '^FO$x,$y^GFA,$_total,$_total,$_widthBytes,$_asciiCode^FS';
   }
 
   @override
   ZplComposer fromString(String zplString) {
     return this;
-  }
-
-  @override
-  String getString() {
-    build();
-
-    return _zplString;
   }
 }

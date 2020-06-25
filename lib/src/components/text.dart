@@ -6,8 +6,6 @@ class Text implements ZplComposer {
   int y;
   int x;
 
-  String _zplString = '';
-
   Text(
     this.text, {
     this.x,
@@ -18,10 +16,8 @@ class Text implements ZplComposer {
   /// [ZplComposer parent] represents the parent
   /// component that requested this instance to build
   @override
-  ZplComposer build([ZplComposer parent]) {
-    _zplString = '^FO$x,$y^FD$text^FS';
-
-    return this;
+  build([ZplComposer parent]) async {
+    return '^FO$x,$y^FD$text^FS';
   }
 
   /// Makes a new instance based on [zplString]
@@ -31,13 +27,5 @@ class Text implements ZplComposer {
   @override
   ZplComposer fromString(String zplString) {
     return this;
-  }
-
-  /// Gets the ZPL code as String
-  @override
-  String getString() {
-    build();
-
-    return _zplString;
   }
 }
